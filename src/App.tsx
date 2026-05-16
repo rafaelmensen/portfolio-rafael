@@ -14,6 +14,7 @@ import {
   GraduationCap,
   Layers3,
   Mail,
+  MessageCircle,
   Home,
   MonitorSmartphone,
   MoveRight,
@@ -65,8 +66,9 @@ type SkillItem = {
 
 type ToolItem = {
   name: string;
-  href: string;
   type: "design" | "code";
+  short: string;
+  accent: string;
 };
 
 type ProjectItem = {
@@ -77,33 +79,40 @@ type ProjectItem = {
   shape: string;
 };
 
+type SocialItem = {
+  label: string;
+  href?: string;
+  copyPhone?: boolean;
+};
+
 const sectionIds = ["home", "about", "skills", "projects", "experience", "education", "certificates", "contact"];
 
 const mainSkills: SkillItem[] = [
-  { icon: MonitorSmartphone, title: "UI Design", text: "Interfaces modernas, responsivas e com foco em experiência visual premium." },
-  { icon: Wand2, title: "Motion Design", text: "Microinterações, animações suaves e ritmo visual para produtos digitais." },
-  { icon: Brush, title: "Visual Design", text: "Composição, identidade, hierarquia visual, cores e acabamento profissional." },
-  { icon: Code2, title: "Design Front-end", text: "Transformação de layouts em interfaces com TypeScript, CSS e React." },
+  { icon: MonitorSmartphone, title: "UI Design", text: "Criação de interfaces modernas, organizadas e responsivas com foco em experiência visual, usabilidade e identidade digital." },
+  { icon: Wand2, title: "Motion Design", text: "Animações, transições e microinterações para deixar produtos digitais mais fluidos, vivos e profissionais." },
+  { icon: Brush, title: "Visual Design", text: "Composição visual, identidade, hierarquia, contraste, cores e acabamento para materiais digitais mais fortes." },
+  { icon: Code2, title: "Design Front-end", text: "Transformação de layouts e protótipos em interfaces funcionais usando React, TypeScript e CSS moderno." },
 ];
 
 const tools: ToolItem[] = [
-  { name: "Figma", href: "https://www.figma.com", type: "design" },
-  { name: "Adobe Illustrator", href: "https://www.adobe.com/products/illustrator.html", type: "design" },
-  { name: "Photoshop", href: "https://www.adobe.com/products/photoshop.html", type: "design" },
-  { name: "Blender", href: "https://www.blender.org", type: "design" },
-  { name: "Krita", href: "https://krita.org", type: "design" },
-  { name: "TypeScript", href: "https://www.typescriptlang.org", type: "code" },
-  { name: "CSS", href: "https://developer.mozilla.org/docs/Web/CSS", type: "code" },
-  { name: "React", href: "https://react.dev", type: "code" },
+  { name: "Figma", type: "design", short: "Fi", accent: "from-pink-500/30 via-purple-500/25 to-orange-400/20" },
+  { name: "Illustrator", type: "design", short: "Ai", accent: "from-orange-500/35 via-amber-500/25 to-yellow-300/15" },
+  { name: "Photoshop", type: "design", short: "Ps", accent: "from-blue-500/35 via-cyan-500/20 to-sky-300/15" },
+  { name: "Blender", type: "design", short: "Bl", accent: "from-orange-500/35 via-blue-500/20 to-zinc-300/10" },
+  { name: "Krita", type: "design", short: "Kr", accent: "from-purple-500/30 via-pink-500/20 to-cyan-400/15" },
+  { name: "CapCut", type: "design", short: "Cc", accent: "from-white/25 via-zinc-400/20 to-blue-300/10" },
+  { name: "After Effects", type: "design", short: "Ae", accent: "from-indigo-500/35 via-purple-500/25 to-violet-300/15" },
+  { name: "TypeScript", type: "code", short: "Ts", accent: "from-blue-500/35 via-sky-500/20 to-cyan-300/15" },
+  { name: "CSS", type: "code", short: "CSS", accent: "from-sky-500/35 via-blue-500/20 to-cyan-300/15" },
+  { name: "React", type: "code", short: "⚛", accent: "from-cyan-400/35 via-blue-500/20 to-sky-300/15" },
 ];
 
 const projects: ProjectItem[] = [
-  { title: "Dashboard BI", category: "UI / Dados", description: "Dashboard executivo com foco em leitura rápida e clareza visual.", gradient: "from-zinc-950 via-zinc-900 to-zinc-800", shape: "rounded-[35%_65%_50%_50%]" },
-  { title: "Finance App", category: "UI Design", description: "Interface mobile com cards, hierarquia e experiência limpa.", gradient: "from-black via-zinc-900 to-neutral-700", shape: "rounded-[55%_45%_60%_40%]" },
-  { title: "Motion Poster", category: "Motion", description: "Peça visual com ritmo, textura e direção criativa para redes.", gradient: "from-neutral-950 via-zinc-800 to-stone-700", shape: "rounded-[45%_55%_40%_60%]" },
-  { title: "Landing Page", category: "Front-end", description: "Página responsiva com componentes, animação e visual premium.", gradient: "from-zinc-950 via-slate-900 to-zinc-700", shape: "rounded-[65%_35%_45%_55%]" },
-  { title: "Brand System", category: "Identidade", description: "Sistema visual com tipografia, cores e componentes de marca.", gradient: "from-black via-neutral-900 to-zinc-700", shape: "rounded-[40%_60%_35%_65%]" },
-  { title: "3D Product", category: "Blender", description: "Render 3D com iluminação escura, reflexos e composição de produto.", gradient: "from-zinc-950 via-neutral-800 to-stone-600", shape: "rounded-[60%_40%_50%_50%]" },
+  { title: "3D Render", category: "Design 3D", description: "Produto 3D com iluminação e textura realistas.", gradient: "from-neutral-950 via-zinc-800 to-stone-700", shape: "rounded-[45%_55%_40%_60%]" },
+  { title: "Sistema de Gestão/Orçamento", category: "UI / Back-end", description: "Página operacional para gestão e orçamento da empresa MRM.", gradient: "from-zinc-950 via-slate-900 to-zinc-700", shape: "rounded-[65%_35%_45%_55%]" },
+  { title: "Identidade Visual BI Sicredi", category: "Design / Idendidade Visual", description: "Identidade visual do produto final para o setor de BI do Sicredi.", gradient: "from-black via-zinc-900 to-neutral-700", shape: "rounded-[60%_40%_50%_50%]" },
+  { title: "Animação e Motion Design", category: "3D / Motion Design", description: "Produtos digitais com animações e motion design.", gradient: "from-zinc-950 via-slate-900 to-zinc-700", shape: "rounded-[65%_35%_45%_55%]" },
+  { title: "Spotify", category: "UI / UX", description: "Recriação do Spotify com foco em experiência do usuário.", gradient: "from-zinc-950 via-neutral-800 to-stone-600", shape: "rounded-[60%_40%_50%_50%]" },
 ];
 
 const experience: ExperienceItem[] = [
@@ -133,12 +142,28 @@ const certificates: CertificateItem[] = [
   { title: "Power Apps Expert na Prática", issuer: "Viscari Inc.", issued: "mai de 2023", code: "768ac008-995e-4267-95c6-e979b0d1328f", skills: "Power Apps", logo: "V", logoClass: "bg-orange-700 text-white" },
 ];
 
-const socialLinks = ["Instagram", "LinkedIn", "GitHub", "Behance"];
+const socialLinks: SocialItem[] = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/rafaelmensen/",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/rafael-mensen-9462641b7/",
+  },
+  {
+    label: "WhatsApp",
+    href: "42999698703",
+    copyPhone: true,
+  },
+];
 
 function ToolIcon({ tool }: { tool: ToolItem }) {
-  if (tool.type === "code") return <Code2 className="h-5 w-5" />;
-  if (tool.name === "Figma") return <PenTool className="h-5 w-5" />;
-  return <Brush className="h-5 w-5" />;
+  return (
+    <div className={`grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br ${tool.accent} text-sm font-black text-white shadow-[inset_1px_1px_0_rgba(255,255,255,0.16)]`}>
+      {tool.short}
+    </div>
+  );
 }
 
 export default function PortfolioRafaelMensen() {
@@ -152,12 +177,41 @@ export default function PortfolioRafaelMensen() {
   const [rippleKey, setRippleKey] = useState(0);
   const [isNavScrolling, setIsNavScrolling] = useState(false);
   const [introBlur, setIntroBlur] = useState(true);
+  const [whatsCopied, setWhatsCopied] = useState(false);
   const displayActive = active === "education" || active === "certificates" ? "experience" : active;
 
   const triggerPulse = () => {
     setPulse(true);
     setRippleKey((current) => current + 1);
     window.setTimeout(() => setPulse(false), 460);
+  };
+
+  const copyWhatsApp = async () => {
+    triggerPulse();
+
+    const phone = "42999698703";
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(phone);
+      } else {
+        const input = document.createElement("textarea");
+        input.value = phone;
+        input.setAttribute("readonly", "");
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+      }
+
+      setWhatsCopied(true);
+      window.setTimeout(() => setWhatsCopied(false), 2200);
+    } catch {
+      setWhatsCopied(true);
+      window.setTimeout(() => setWhatsCopied(false), 2200);
+    }
   };
   const { scrollY } = useScroll();
   const mouseX = useMotionValue(0);
@@ -348,9 +402,13 @@ export default function PortfolioRafaelMensen() {
             will-change: transform, opacity;
           }
           .mobile-nav-item {
-            transition-property: background-color, border-color, box-shadow, color, opacity;
-            transition-duration: 180ms;
+            transition-property: background-color, border-color, box-shadow, color, opacity, transform;
+            transition-duration: 160ms;
             transition-timing-function: cubic-bezier(.22,1,.36,1);
+            transform: translateZ(0);
+          }
+          .mobile-nav-item:active {
+            transform: scale(.94) translateZ(0);
           }
         }
 
@@ -490,7 +548,7 @@ export default function PortfolioRafaelMensen() {
                   title={item.label}
                   className={`mobile-nav-item group relative flex h-11 shrink-0 items-center overflow-hidden rounded-full border md:transition-[width,background-color,border-color,box-shadow,transform,filter] md:duration-260 md:ease-[cubic-bezier(0.2,0.8,0.2,1)] md:h-12 ${
                     isActive
-                      ? "w-[116px] border-transparent bg-white/[0.105] px-2 pr-3 text-white shadow-[inset_1px_1px_0_rgba(255,255,255,0.10),0_0_24px_rgba(90,115,255,0.16)] md:w-auto md:min-w-0 md:px-2 md:pr-5"
+                      ? "w-11 justify-center border-transparent bg-white/[0.105] px-0 text-white shadow-[inset_1px_1px_0_rgba(255,255,255,0.10),0_0_24px_rgba(90,115,255,0.16)] md:w-auto md:min-w-0 md:justify-start md:px-2 md:pr-5"
                       : "w-11 justify-center border-white/5 bg-white/[0.025] text-white/62 hover:border-white/14 hover:bg-white/[0.055] hover:text-white md:w-12"
                   } ${pulse && isActive ? "motion-blur-nav" : ""}`}
                 >
@@ -498,7 +556,7 @@ export default function PortfolioRafaelMensen() {
                     <Icon className="h-5 w-5" />
                   </span>
                   {isActive && (
-                    <span className="truncate pr-1 text-sm font-semibold opacity-100 transition-opacity duration-150 ease-out">
+                    <span className="hidden truncate pr-1 text-sm font-semibold opacity-100 transition-opacity duration-150 ease-out md:inline">
                       {item.label}
                     </span>
                   )}
@@ -514,7 +572,7 @@ export default function PortfolioRafaelMensen() {
           <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }} className="w-full">
             <div className="grid gap-8 lg:grid-cols-[1fr_280px] lg:items-center">
               <div className="max-w-3xl">
-                <p className="text-lg font-medium text-white/55">Olá, eu sou</p>
+                <p className="text-lg font-medium text-white/55">Designer UI/UX</p>
                 <div className="mt-2 flex items-center gap-4">
                   <h1 className="text-4xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
                     Rafael <span className="text-white">Mensen</span>
@@ -527,7 +585,7 @@ export default function PortfolioRafaelMensen() {
                   </div>
                 </div>
                 <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400 transition hover:text-zinc-200">
-                  Designer focado em UI, motion design e experiências digitais com aparência premium. Crio interfaces limpas, visuais fortes e soluções que unem design, dados e tecnologia.
+                  Trabalho com criação de materiais de design voltados para interfaces, identidade visual e 3D.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a href="#projects" onClick={(event) => smoothScrollTo(event, "projects")} className="group inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-5 py-3 text-sm font-semibold text-white backdrop-blur-2xl transition hover:bg-white/[0.10]">
@@ -576,21 +634,22 @@ export default function PortfolioRafaelMensen() {
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75 }} className="reveal-premium px-1">
             <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <div>
-                <div className="text-xs uppercase tracking-[0.35em] text-zinc-600">Sobre mim</div>
-                <h2 className="mt-4 text-3xl font-black sm:text-4xl">Design visual com foco em produto, dados e movimento.</h2>
+                <div className="text-xs uppercase tracking-[0.35em] text-zinc-400">Sobre mim</div>
+                <h2 className="mt-4 text-3xl font-black sm:text-4xl">Design visual com foco em produto, dados e interações.</h2>
               </div>
               <div>
                 <p className="text-base leading-8 text-zinc-400 transition hover:text-zinc-200">
-                  Trabalho criando soluções visuais para tornar informações e experiências mais claras, bonitas e profissionais. Minha base mistura design de interface, dashboards, composição visual, motion e desenvolvimento front-end para transformar ideias em experiências digitais modernas.
+                  Trabalho criando soluções visuais para deixar informações e experiências mais claras, modernas e bem construídas. 
+Minha base mistura design de interface, dashboards, composição visual, motion e front-end para transformar ideias em experiências digitais.
                 </p>
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4 shadow-[inset_1px_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl">
                     <div className="text-sm font-bold text-zinc-200">Design orientado a dados</div>
-                    <p className="mt-2 text-sm leading-6 text-zinc-500">Crio telas e dashboards pensando em leitura rápida, hierarquia e tomada de decisão.</p>
+                    <p className="mt-2 text-sm leading-6 text-zinc-500">Crio telas/identidade visual para os dashboards pensando em leitura rápida, hierarquia e negócios.</p>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4 shadow-[inset_1px_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl">
                     <div className="text-sm font-bold text-zinc-200">Experiência premium</div>
-                    <p className="mt-2 text-sm leading-6 text-zinc-500">Uso motion, glass e detalhes visuais para entregar interfaces com mais impacto.</p>
+                    <p className="mt-2 text-sm leading-6 text-zinc-500">Uso motion, efeitos glass, 3D e detalhes visuais para deixar as interfaces mais vivas e com mais impacto no uso ou produto.</p>
                   </div>
                 </div>
               </div>
@@ -602,23 +661,22 @@ export default function PortfolioRafaelMensen() {
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75 }} className="reveal-premium">
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
-                <div className="text-xs uppercase tracking-[0.35em] text-zinc-600">Principais skills</div>
-                <h2 className="mt-2 text-3xl font-black sm:text-4xl">Design, motion e interface</h2>
+                <div className="text-xs uppercase tracking-[0.35em] text-zinc-400">Principais skills</div>
+                <h2 className="mt-2 text-3xl font-black sm:text-4xl">Ferramentas com expertise</h2>
               </div>
-              <PenTool className="hidden h-8 w-8 text-white/35 md:block" />
+
             </div>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-4">
               {tools.map((tool) => (
-                <a key={tool.name} href={tool.href} target="_blank" rel="noreferrer" className="group soft-reveal text-glow-hover rounded-[1.6rem] border border-white/10 bg-black/45 p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:text-white hover:bg-white/[0.045]">
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                <div key={tool.name} className="group soft-reveal text-glow-hover rounded-[1.6rem] border border-white/10 bg-black/45 p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:text-white hover:bg-white/[0.045]">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center">
                     <ToolIcon tool={tool} />
                   </div>
                   <div className="flex items-center justify-between gap-2 font-semibold">
                     {tool.name}
-                    <ExternalLink className="h-3.5 w-3.5 text-zinc-500 opacity-0 transition group-hover:opacity-100" />
                   </div>
                   <div className="mt-2 h-px w-full bg-gradient-to-r from-white/15 to-transparent" />
-                </a>
+                </div>
               ))}
             </div>
           </motion.div>
@@ -628,9 +686,9 @@ export default function PortfolioRafaelMensen() {
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75 }} className="reveal-premium">
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
-                <div className="text-xs uppercase tracking-[0.35em] text-zinc-600">Projetos</div>
-                <h2 className="mt-2 text-3xl font-black sm:text-4xl">Vitrine de trabalhos</h2>
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-500">Cards horizontais com exemplos visuais. Arraste no celular ou use os botões para ver os 6 projetos.</p>
+                <div className="text-xs uppercase tracking-[0.35em] text-zinc-400">Projetos</div>
+                <h2 className="mt-2 text-3xl font-black sm:text-4xl">Projetos</h2>
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-500">Alguns projetos e conceitos visuais que mostram um pouco do meu processo com interfaces, motion e direção visual.</p>
               </div>
               <div className="hidden gap-2 md:flex">
                 <button onClick={() => { triggerPulse(); scrollProjects("left"); }} className="grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-black/50 text-white/70 backdrop-blur-xl transition duration-300 hover:scale-105 hover:bg-white/[0.07] active:scale-95" aria-label="Voltar projetos">
@@ -670,7 +728,7 @@ export default function PortfolioRafaelMensen() {
         <section id="experience" className="mx-auto max-w-6xl px-6 py-20 lg:px-10">
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75 }} className="reveal-premium">
             <div className="mb-10">
-              <div className="text-xs uppercase tracking-[0.35em] text-zinc-600">Trajetória profissional</div>
+              <div className="text-xs uppercase tracking-[0.35em] text-zinc-400">Trajetória profissional</div>
               <h2 className="mt-2 text-3xl font-black sm:text-4xl">Experiências</h2>
             </div>
 
@@ -814,17 +872,45 @@ export default function PortfolioRafaelMensen() {
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75 }} className="reveal-premium rounded-[2.2rem] border border-white/10 bg-black/60 p-8 backdrop-blur-2xl">
             <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end">
               <div>
-                <div className="text-xs uppercase tracking-[0.35em] text-zinc-600">Contato</div>
-                <h2 className="mt-3 text-3xl font-black sm:text-4xl">Vamos conversar?</h2>
-                <p className="mt-4 text-zinc-500">Aqui ficam seus links profissionais para a pessoa acessar rápido.</p>
+                <div className="text-xs uppercase tracking-[0.35em] text-zinc-400">Contato</div>
+                <h2 className="mt-3 text-3xl font-black sm:text-4xl">Acesse meus contatos profissionais!</h2>
+                <p className="mt-4 text-zinc-500">Links rápidos para contato.</p>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                {socialLinks.map((item) => (
-                  <a key={item} href="#" onClick={triggerPulse} className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-4 text-sm text-zinc-300 transition hover:border-white/20 hover:text-white hover:bg-white/[0.06]">
-                    {item}
-                    <ArrowDown className="h-4 w-4 -rotate-90 transition group-hover:translate-x-1" />
-                  </a>
-                ))}
+                {socialLinks.map((item) => {
+                  const isWhatsApp = item.copyPhone;
+
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href ?? "#"}
+                      target={item.href ? "_blank" : undefined}
+                      rel={item.href ? "noreferrer" : undefined}
+                      onClick={(event) => {
+                        if (isWhatsApp) {
+                          event.preventDefault();
+                          copyWhatsApp();
+                          return;
+                        }
+
+                        triggerPulse();
+                      }}
+                      className={`group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-4 text-sm text-zinc-300 transition hover:border-white/20 hover:text-white hover:bg-white/[0.06] ${
+                        isWhatsApp ? "hover:shadow-[0_0_28px_rgba(70,255,150,0.12)]" : ""
+                      }`}
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        {isWhatsApp && <MessageCircle className="h-4 w-4" />}
+                        {isWhatsApp
+                          ? whatsCopied
+                            ? "Copiado: 42 99969-8703"
+                            : "WhatsApp"
+                          : item.label}
+                      </span>
+                      <ArrowDown className="h-4 w-4 -rotate-90 transition group-hover:translate-x-1" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
