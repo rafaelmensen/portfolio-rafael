@@ -1,0 +1,1 @@
+Imagem do projeto 4: renomeie sua imagem para foto4.jpg e coloque nesta pasta public.
