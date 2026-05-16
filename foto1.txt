@@ -1,1 +1,1 @@
-Coloque aqui a imagem do projeto com o nome exato: foto1.jpg
+Imagem do projeto 1: renomeie sua imagem para foto1.jpg e coloque nesta pasta public.
