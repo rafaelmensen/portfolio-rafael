@@ -34,6 +34,7 @@ type ExperienceItem = {
   skills: string;
   logo: string;
   logoClass: string;
+  image?: string;
 };
 
 type EducationItem = {
@@ -105,11 +106,11 @@ const projects: ProjectItem[] = [
 ];
 
 const experience: ExperienceItem[] = [
-  { company: "Sicredi Campos Gerais e Grande Curitiba PR/SP", role: "Assistente de BI", contract: "Tempo integral", period: "fev de 2025 — o momento", duration: "1 ano 4 meses", location: "Ponta Grossa, Paraná, Brasil", skills: "Power BI, Design de Dashboards, UI para dados e análise visual", logo: "✳", logoClass: "bg-zinc-200 text-emerald-700" },
-  { company: "Sicredi Campos Gerais e Grande Curitiba PR/SP", role: "Jovem aprendiz Setor de BI", contract: "Meio período", period: "set de 2024 — fev de 2025", duration: "6 meses", location: "Ponta Grossa, Paraná, Brasil · Presencial", skills: "Dashboards, organização de dados e suporte ao time de BI", logo: "✳", logoClass: "bg-zinc-200 text-emerald-700" },
-  { company: "Odonto Excellence Franchising", role: "Gerente Administrativo Sênior", contract: "Tempo integral", period: "dez de 2022 — jan de 2024", duration: "1 ano 2 meses", location: "Ponta Grossa, Paraná, Brasil", skills: "Administração, gestão de equipes e análise de negócios", logo: "O", logoClass: "bg-red-950 text-red-200" },
-  { company: "GH Imóveis", role: "Assistente administrativo", contract: "Tempo integral", period: "abr de 2022 — dez de 2022", duration: "9 meses", location: "Ponta Grossa, Paraná, Brasil", skills: "Administração, atendimento e processos internos", logo: "GH", logoClass: "bg-slate-200 text-slate-600" },
-  { company: "Clínica Sabedotti", role: "Estágiário", contract: "Meio período", period: "jun de 2021 — ago de 2021", duration: "3 meses", location: "Ponta Grossa, Paraná, Brasil", skills: "Rotinas administrativas e suporte operacional", logo: "CS", logoClass: "bg-slate-200 text-slate-600" },
+  { company: "Sicredi Campos Gerais e Grande Curitiba PR/SP", role: "Assistente de BI", contract: "Tempo integral", period: "fev de 2025 — o momento", duration: "1 ano 4 meses", location: "Ponta Grossa, Paraná, Brasil", skills: "Power BI, Design de Dashboards, UI para dados e análise visual", logo: "✳", logoClass: "bg-zinc-200 text-emerald-700", image: "empresa1.jpg" },
+  { company: "Sicredi Campos Gerais e Grande Curitiba PR/SP", role: "Jovem aprendiz Setor de BI", contract: "Meio período", period: "set de 2024 — fev de 2025", duration: "6 meses", location: "Ponta Grossa, Paraná, Brasil · Presencial", skills: "Dashboards, organização de dados e suporte ao time de BI", logo: "✳", logoClass: "bg-zinc-200 text-emerald-700", image: "empresa1.jpg" },
+  { company: "Odonto Excellence Franchising", role: "Gerente Administrativo Sênior", contract: "Tempo integral", period: "dez de 2022 — jan de 2024", duration: "1 ano 2 meses", location: "Ponta Grossa, Paraná, Brasil", skills: "Administração, gestão de equipes e análise de negócios", logo: "O", logoClass: "bg-red-950 text-red-200", image: "empresa2.jpg" },
+  { company: "GH Imóveis", role: "Assistente administrativo", contract: "Tempo integral", period: "abr de 2022 — dez de 2022", duration: "9 meses", location: "Ponta Grossa, Paraná, Brasil", skills: "Administração, atendimento e processos internos", logo: "GH", logoClass: "bg-slate-200 text-slate-600", image: "empresa3.jpg" },
+  { company: "Clínica Sabedotti", role: "Estágiário", contract: "Meio período", period: "jun de 2021 — ago de 2021", duration: "3 meses", location: "Ponta Grossa, Paraná, Brasil", skills: "Rotinas administrativas e suporte operacional", logo: "CS", logoClass: "bg-slate-200 text-slate-600", image: "empresa4.jpg" },
 ];
 
 const education: EducationItem[] = [
@@ -326,6 +327,38 @@ export default function PortfolioRafaelMensen() {
         @media (max-width: 767px) {
           section { scroll-margin-top: 92px; }
         }
+
+
+        .is-navigating main {
+          filter: blur(5px) saturate(1.18) brightness(.96);
+          transform: scale(.997);
+          transition: filter 280ms ease, transform 280ms ease;
+        }
+        main { transition: filter 420ms ease, transform 420ms ease; }
+
+        .soft-reveal {
+          opacity: 0;
+          transform: translate3d(0, 42px, 0) scale(.975);
+          filter: blur(22px);
+          animation: softReveal .95s cubic-bezier(.22,1,.36,1) both;
+          animation-timeline: view();
+          animation-range: entry 8% cover 30%;
+        }
+        .soft-reveal:nth-child(2n) { animation-duration: 1.08s; }
+        .soft-reveal:nth-child(3n) { animation-duration: .9s; }
+        @keyframes softReveal {
+          from { opacity: 0; filter: blur(22px); transform: translate3d(0, 42px, 0) scale(.975); }
+          to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) scale(1); }
+        }
+        .text-glow-hover:hover h1,
+        .text-glow-hover:hover h2,
+        .text-glow-hover:hover h3,
+        .text-glow-hover:hover h4,
+        .text-glow-hover:hover p,
+        .text-glow-hover:hover div {
+          color: rgba(255,255,255,.92);
+        }
+
         @keyframes lineDrift {
           0%,100% { transform: translate3d(0,0,0) rotate(-12deg); opacity:.22; }
           50% { transform: translate3d(42px,-26px,0) rotate(-7deg); opacity:.72; }
@@ -367,8 +400,8 @@ export default function PortfolioRafaelMensen() {
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-[#010101]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(100,58,220,0.30),transparent_38%),radial-gradient(circle_at_12%_55%,rgba(35,145,255,0.32),transparent_34%),radial-gradient(circle_at_88%_45%,rgba(155,82,255,0.28),transparent_36%)]" />
-        <div className="absolute left-[-8%] top-[18%] h-[18rem] w-[72vw] animate-[meshPulse_18s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(75,110,255,0.22),rgba(155,90,255,0.18),transparent)] blur-[54px]" />
-        <div className="absolute right-[-10%] bottom-[16%] h-[16rem] w-[64vw] animate-[meshPulse_20s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(160,80,255,0.18),rgba(65,145,255,0.16),transparent)] blur-[58px]" />
+        <div className="absolute left-[-8%] top-[18%] h-[18rem] w-[72vw] animate-[meshPulse_10s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(75,110,255,0.22),rgba(155,90,255,0.18),transparent)] blur-[54px]" />
+        <div className="absolute right-[-10%] bottom-[16%] h-[16rem] w-[64vw] animate-[meshPulse_12s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(160,80,255,0.18),rgba(65,145,255,0.16),transparent)] blur-[58px]" />
         <motion.div
           className="absolute h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,rgba(0,0,0,0.72),rgba(0,0,0,0.42)_38%,rgba(0,0,0,0.12)_62%,transparent_76%)] blur-[34px]"
           style={{ left: mouseX, top: mouseY, x: "-50%", y: "-50%", opacity: scrollGlow }}
@@ -377,14 +410,14 @@ export default function PortfolioRafaelMensen() {
           className="absolute h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,rgba(0,0,0,0.55),rgba(0,0,0,0.22)_48%,transparent_72%)] blur-[22px]"
           style={{ left: mouseX, top: mouseY, x: "-50%", y: "-50%", opacity: scrollGlow }}
         />
-        <div className="absolute -left-[18%] top-[4%] h-[420px] w-[1100px] animate-[lineDrift_18s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(62,145,255,0.86),rgba(185,82,255,0.72),transparent)] blur-3xl" />
-        <div className="absolute left-[4%] top-[34%] h-[280px] w-[980px] animate-[lineDriftTwo_20s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(45,165,255,0.72),rgba(175,72,255,0.68),transparent)] blur-3xl" />
-        <div className="absolute right-[-20%] top-[12%] h-[380px] w-[1020px] animate-[lineDrift_22s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(166,92,255,0.44),rgba(80,120,255,0.34),transparent)] blur-3xl" />
-        <div className="absolute left-[18%] bottom-[4%] h-[320px] w-[760px] animate-[orbFlow_24s_ease-in-out_infinite] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(60,120,255,0.32),rgba(140,80,255,0.22)_44%,transparent_72%)] blur-[70px]" />
-        <div className="absolute right-[8%] bottom-[18%] h-[260px] w-[640px] animate-[orbFlow_21s_ease-in-out_infinite] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(170,80,255,0.30),rgba(50,110,255,0.20)_42%,transparent_70%)] blur-[68px]" />
-        <div className="absolute left-[8%] top-[11%] h-px w-[60vw] animate-[streakFlow_6s_ease-in-out_infinite_alternate] bg-gradient-to-r from-transparent via-blue-300/50 to-transparent blur-[1px]" />
-        <div className="absolute right-[4%] top-[27%] h-px w-[50vw] animate-[streakFlow_7s_ease-in-out_infinite_alternate] bg-gradient-to-r from-transparent via-purple-300/48 to-transparent blur-[1px]" />
-        <div className="absolute bottom-[22%] left-[18%] h-px w-[52vw] animate-[streakFlow_8s_ease-in-out_infinite_alternate] bg-gradient-to-r from-transparent via-blue-200/44 to-transparent blur-[1px]" />
+        <div className="absolute -left-[18%] top-[4%] h-[420px] w-[1100px] animate-[lineDrift_9s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(62,145,255,0.86),rgba(185,82,255,0.72),transparent)] blur-3xl" />
+        <div className="absolute left-[4%] top-[34%] h-[280px] w-[980px] animate-[lineDriftTwo_10s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(45,165,255,0.72),rgba(175,72,255,0.68),transparent)] blur-3xl" />
+        <div className="absolute right-[-20%] top-[12%] h-[380px] w-[1020px] animate-[lineDrift_11s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(166,92,255,0.44),rgba(80,120,255,0.34),transparent)] blur-3xl" />
+        <div className="absolute left-[18%] bottom-[4%] h-[320px] w-[760px] animate-[orbFlow_13s_ease-in-out_infinite] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(60,120,255,0.32),rgba(140,80,255,0.22)_44%,transparent_72%)] blur-[70px]" />
+        <div className="absolute right-[8%] bottom-[18%] h-[260px] w-[640px] animate-[orbFlow_12s_ease-in-out_infinite] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(170,80,255,0.30),rgba(50,110,255,0.20)_42%,transparent_70%)] blur-[68px]" />
+        <div className="absolute left-[8%] top-[11%] h-px w-[60vw] animate-[streakFlow_3.8s_ease-in-out_infinite_alternate] bg-gradient-to-r from-transparent via-blue-300/50 to-transparent blur-[1px]" />
+        <div className="absolute right-[4%] top-[27%] h-px w-[50vw] animate-[streakFlow_4.2s_ease-in-out_infinite_alternate] bg-gradient-to-r from-transparent via-purple-300/48 to-transparent blur-[1px]" />
+        <div className="absolute bottom-[22%] left-[18%] h-px w-[52vw] animate-[streakFlow_4.6s_ease-in-out_infinite_alternate] bg-gradient-to-r from-transparent via-blue-200/44 to-transparent blur-[1px]" />
         <div className={`absolute inset-0 transition-opacity duration-500 ${pulse ? "opacity-100" : "opacity-0"}`}>
           <div className="absolute left-[12%] top-[18%] h-[28rem] w-[28rem] rounded-full bg-blue-500/22 blur-[90px]" />
           <div className="absolute right-[18%] top-[30%] h-[24rem] w-[24rem] rounded-full bg-purple-500/20 blur-[95px]" />
@@ -398,8 +431,8 @@ export default function PortfolioRafaelMensen() {
       </div>
 
       <header className={`fixed inset-x-0 top-4 z-50 flex justify-center px-3 transition-opacity duration-700 ${idleNav ? "opacity-35 hover:opacity-100" : "opacity-100"}`}>
-        <nav className={`relative max-w-[calc(100vw-24px)] rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.24),rgba(142,92,255,0.30),rgba(70,150,255,0.26),rgba(255,255,255,0.13))] bg-[length:260%_260%] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.7),0_0_44px_rgba(90,105,255,0.16)] backdrop-blur-[30px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] animate-[navOpen_850ms_cubic-bezier(0.22,1,0.36,1)_both] ${pulse ? "scale-[1.012] blur-[0.12px]" : "scale-100 blur-0"}`}>
-          <div className="relative flex items-center gap-1 overflow-hidden rounded-full bg-black/70 p-1.5 backdrop-blur-[32px] md:p-2">
+        <nav className={`relative max-w-[calc(100vw-24px)] rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.24),rgba(142,92,255,0.30),rgba(70,150,255,0.26),rgba(255,255,255,0.13))] bg-[length:260%_260%] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.7),0_0_44px_rgba(90,105,255,0.16)] backdrop-blur-[38px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] animate-[navOpen_850ms_cubic-bezier(0.22,1,0.36,1)_both] ${pulse ? "scale-[1.012] blur-[0.12px]" : "scale-100 blur-0"}`}>
+          <div className="relative flex items-center gap-1 overflow-hidden rounded-full bg-black/58 p-1.5 shadow-[inset_1px_1px_0_rgba(255,255,255,0.10),inset_-1px_-1px_0_rgba(255,255,255,0.03)] backdrop-blur-[42px] md:p-2">
             <div className={`pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(95,150,255,0.30),transparent_55%)] transition-opacity duration-500 ${pulse ? "opacity-100" : "opacity-0"}`} />
 
             {nav.map((item) => {
@@ -445,13 +478,13 @@ export default function PortfolioRafaelMensen() {
                     Rafael <span className="bg-gradient-to-r from-white via-zinc-400 to-zinc-700 bg-clip-text text-transparent">Mensen</span>
                   </h1>
 
-                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-3xl border border-white/15 bg-white/[0.05] p-1 shadow-[inset_1px_1px_0_rgba(255,255,255,0.16),0_18px_55px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:h-24 sm:w-24 lg:hidden">
+                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-3xl bg-[linear-gradient(120deg,rgba(255,255,255,0.26),rgba(142,92,255,0.32),rgba(70,150,255,0.28),rgba(255,255,255,0.12))] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.45)] backdrop-blur-[38px] sm:h-24 sm:w-24 lg:hidden">
                     <div className="h-full w-full overflow-hidden rounded-[1.25rem] bg-black/40">
-                      <img src="/rafael.jpg" alt="Rafael Mensen" className="h-full w-full object-cover" />
+                      <img src={`${import.meta.env.BASE_URL}rafael.jpg`} alt="Rafael Mensen" className="h-full w-full object-cover" />
                     </div>
                   </div>
                 </div>
-                <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400 transition hover:text-zinc-200">
                   Designer focado em UI, motion design e experiências digitais com aparência premium. Crio interfaces limpas, visuais fortes e soluções que unem design, dados e tecnologia.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
@@ -467,10 +500,10 @@ export default function PortfolioRafaelMensen() {
 
               <div className="relative hidden lg:block lg:self-start lg:pt-0">
                 <div className="absolute -inset-8 rounded-[3rem] bg-[radial-gradient(circle,rgba(110,92,255,0.22),transparent_65%)] blur-2xl" />
-                <div className="relative mx-auto max-w-[220px] overflow-hidden rounded-[2.2rem] sm:max-w-[240px] lg:max-w-[260px] border border-white/12 bg-white/[0.045] p-3 shadow-[inset_1px_1px_0_rgba(255,255,255,0.16),0_30px_90px_rgba(0,0,0,0.55)] backdrop-blur-2xl">
-                  <div className="grid aspect-[4/5] place-items-center overflow-hidden rounded-[1.6rem] border border-white/10 bg-[radial-gradient(circle_at_35%_22%,rgba(255,255,255,0.12),transparent_28%),linear-gradient(145deg,rgba(18,22,35,0.92),rgba(7,7,10,0.96))]">
+                <div className="relative mx-auto max-w-[220px] overflow-hidden rounded-[2.2rem] bg-[linear-gradient(120deg,rgba(255,255,255,0.28),rgba(142,92,255,0.34),rgba(70,150,255,0.30),rgba(255,255,255,0.14))] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.70),0_0_44px_rgba(90,105,255,0.14)] backdrop-blur-[38px] sm:max-w-[240px] lg:max-w-[260px]">
+                  <div className="m-3 grid aspect-[4/5] place-items-center overflow-hidden rounded-[1.6rem] border border-white/10 bg-[radial-gradient(circle_at_35%_22%,rgba(255,255,255,0.12),transparent_28%),linear-gradient(145deg,rgba(18,22,35,0.92),rgba(7,7,10,0.96))]">
                     <img
-                      src="/rafael.jpg"
+                      src={`${import.meta.env.BASE_URL}rafael.jpg`}
                       alt="Rafael Mensen"
                       className="h-full w-full object-cover scale-[1.02]"
                     />
@@ -484,7 +517,7 @@ export default function PortfolioRafaelMensen() {
                 const Icon = skill.icon;
 
                 return (
-                  <div key={skill.title} className="rounded-[1.6rem] border border-white/10 bg-black/42 p-3 sm:p-5 shadow-[inset_1px_1px_0_rgba(255,255,255,0.10),inset_-1px_-1px_0_rgba(255,255,255,0.02),0_24px_70px_rgba(0,0,0,0.45)] backdrop-blur-2xl transition duration-300 hover:-translate-y-1 hover:border-white/20">
+                  <div key={skill.title} className="soft-reveal text-glow-hover rounded-[1.6rem] border border-white/10 bg-black/42 p-3 sm:p-5 shadow-[inset_1px_1px_0_rgba(255,255,255,0.10),inset_-1px_-1px_0_rgba(255,255,255,0.02),0_24px_70px_rgba(0,0,0,0.45)] backdrop-blur-2xl transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:text-white">
                     <div className="mb-5 inline-grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-white/[0.04]">
                       <Icon className="h-5 w-5" />
                     </div>
@@ -505,7 +538,7 @@ export default function PortfolioRafaelMensen() {
                 <h2 className="mt-4 text-3xl font-black sm:text-4xl">Design visual com foco em produto, dados e movimento.</h2>
               </div>
               <div>
-                <p className="text-base leading-8 text-zinc-400">
+                <p className="text-base leading-8 text-zinc-400 transition hover:text-zinc-200">
                   Trabalho criando soluções visuais para tornar informações e experiências mais claras, bonitas e profissionais. Minha base mistura design de interface, dashboards, composição visual, motion e desenvolvimento front-end para transformar ideias em experiências digitais modernas.
                 </p>
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -534,7 +567,7 @@ export default function PortfolioRafaelMensen() {
             </div>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-4">
               {tools.map((tool) => (
-                <a key={tool.name} href={tool.href} target="_blank" rel="noreferrer" className="group rounded-[1.6rem] border border-white/10 bg-black/45 p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.045]">
+                <a key={tool.name} href={tool.href} target="_blank" rel="noreferrer" className="group soft-reveal text-glow-hover rounded-[1.6rem] border border-white/10 bg-black/45 p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:text-white hover:bg-white/[0.045]">
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
                     <ToolIcon tool={tool} />
                   </div>
@@ -572,11 +605,11 @@ export default function PortfolioRafaelMensen() {
               <div className="pointer-events-none absolute bottom-4 right-0 top-0 z-20 w-16 bg-gradient-to-l from-[#020202]/90 to-transparent sm:w-28" />
               <div className="story-carousel relative z-10 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] md:gap-5 md:overflow-visible md:pb-0 md:transition-transform md:duration-[900ms] md:ease-[cubic-bezier(0.22,1,0.36,1)] md:will-change-transform" style={{ transform: `translateX(-${projectIndex * cardShift}px)` }}>
                 {projects.map((project, index) => (
-                  <article key={project.title} className="group relative h-[390px] w-[78vw] max-w-[330px] snap-center shrink-0 overflow-hidden sm:h-[390px] sm:w-[330px] rounded-[2.2rem] border border-white/10 bg-black/50 shadow-[inset_1px_1px_0_rgba(255,255,255,0.10),0_26px_80px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition duration-500 hover:-translate-y-2 hover:border-white/20">
+                  <article key={project.title} className="group soft-reveal relative h-[390px] w-[78vw] max-w-[330px] snap-center shrink-0 overflow-hidden sm:h-[390px] sm:w-[330px] rounded-[2.2rem] border border-white/10 bg-black/50 shadow-[inset_1px_1px_0_rgba(255,255,255,0.10),0_26px_80px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition duration-500 hover:-translate-y-2 hover:border-white/20 hover:text-white">
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`} />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_20%,rgba(255,255,255,0.14),transparent_26%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.08),transparent_30%)]" />
                     <div className={`absolute left-1/2 top-10 h-56 w-56 sm:top-12 sm:h-60 sm:w-60 -translate-x-1/2 overflow-hidden ${project.shape} border border-white/10 bg-white/[0.075] shadow-[inset_10px_10px_28px_rgba(255,255,255,0.10),inset_-18px_-18px_40px_rgba(0,0,0,0.55),0_0_50px_rgba(255,255,255,0.06)] backdrop-blur-xl transition duration-500 group-hover:scale-110`}>
-                    <img src="/rafael.jpg" alt="Rafael Mensen" className="h-full w-full object-cover opacity-75 mix-blend-luminosity" />
+                    <img src={`${import.meta.env.BASE_URL}foto${index + 1}.jpg`} alt={project.title} className="h-full w-full object-cover opacity-80 mix-blend-luminosity transition duration-500 group-hover:scale-105 group-hover:opacity-95" />
                     <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/55" />
                   </div>
                     <div className="absolute left-6 top-6 rounded-full border border-white/10 bg-black/35 px-3 py-1 text-xs text-zinc-300 backdrop-blur-xl">{String(index + 1).padStart(2, "0")}</div>
@@ -601,9 +634,15 @@ export default function PortfolioRafaelMensen() {
 
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#111313]/80 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.48)] backdrop-blur-xl">
               {visibleExperience.map((item, index) => (
-                <div key={`${item.company}-${item.role}`} className={`grid gap-4 py-5 md:grid-cols-[56px_1fr] ${index !== visibleExperience.length - 1 ? "border-b border-white/8" : ""}`}>
+                <div key={`${item.company}-${item.role}`} className={`soft-reveal grid gap-4 py-5 md:grid-cols-[56px_1fr] ${index !== visibleExperience.length - 1 ? "border-b border-white/8" : ""}`}>
                   <div className="relative">
-                    <div className={`grid h-12 w-12 place-items-center rounded-sm text-lg font-black ${item.logoClass}`}>{item.logo}</div>
+                    <div className={`grid h-12 w-12 overflow-hidden place-items-center rounded-sm text-lg font-black ${item.logoClass}`}>
+                      {item.image ? (
+                        <img src={`${import.meta.env.BASE_URL}${item.image}`} alt={item.company} className="h-full w-full object-cover" onError={(event) => { event.currentTarget.style.display = "none"; }} />
+                      ) : (
+                        item.logo
+                      )}
+                    </div>
                     {index !== visibleExperience.length - 1 && <div className="absolute left-6 top-14 h-[calc(100%-10px)] w-px bg-white/10" />}
                   </div>
                   <div>
@@ -656,7 +695,7 @@ export default function PortfolioRafaelMensen() {
 
               <div className="rounded-[2rem] border border-white/10 bg-[#151818]/85 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-xl">
                 {education.map((item, index) => (
-                  <div key={item.institution} className={`grid gap-4 py-5 md:grid-cols-[56px_1fr_auto] ${index !== education.length - 1 ? "border-b border-white/8" : ""}`}>
+                  <div key={item.institution} className={`soft-reveal grid gap-4 py-5 md:grid-cols-[56px_1fr_auto] ${index !== education.length - 1 ? "border-b border-white/8" : ""}`}>
                     <div className={`grid h-12 w-12 place-items-center rounded-sm text-sm font-black ${item.logoClass}`}>{item.logo}</div>
                     <div>
                       <h4 className="font-bold text-zinc-200">{item.institution}</h4>
@@ -682,7 +721,7 @@ export default function PortfolioRafaelMensen() {
 
               <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#151818]/85 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-xl">
                 {visibleCertificates.map((item, index) => (
-                  <div key={item.code} className={`grid gap-4 py-5 md:grid-cols-[56px_1fr_auto] ${index !== visibleCertificates.length - 1 ? "border-b border-white/8" : ""}`}>
+                  <div key={item.code} className={`soft-reveal grid gap-4 py-5 md:grid-cols-[56px_1fr_auto] ${index !== visibleCertificates.length - 1 ? "border-b border-white/8" : ""}`}>
                     <div className={`grid h-12 w-12 place-items-center rounded-sm text-2xl font-black ${item.logoClass}`}>{item.logo}</div>
                     <div>
                       <h4 className="font-bold text-zinc-200">{item.title}</h4>
@@ -739,7 +778,7 @@ export default function PortfolioRafaelMensen() {
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 {socialLinks.map((item) => (
-                  <a key={item} href="#" onClick={triggerPulse} className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-4 text-sm text-zinc-300 transition hover:border-white/20 hover:bg-white/[0.06]">
+                  <a key={item} href="#" onClick={triggerPulse} className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-4 text-sm text-zinc-300 transition hover:border-white/20 hover:text-white hover:bg-white/[0.06]">
                     {item}
                     <ArrowDown className="h-4 w-4 -rotate-90 transition group-hover:translate-x-1" />
                   </a>
@@ -750,12 +789,12 @@ export default function PortfolioRafaelMensen() {
         </section>
       </main>
 
-      <a href={active === "home" ? "#contact" : "#home"} onClick={goToEdge} className="fixed bottom-20 left-4 z-50 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/70 px-4 py-3 text-sm text-white/80 backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 md:bottom-6">
+      <a href={active === "home" ? "#contact" : "#home"} onClick={goToEdge} className="fixed bottom-4 left-4 z-50 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/70 px-4 py-3 text-sm text-white/80 backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 md:bottom-6">
         <ArrowDown className={`h-4 w-4 transition ${active === "home" ? "" : "rotate-180"}`} />
         {active === "home" ? "Fim" : "Topo"}
       </a>
 
-      <a href="#contact" onClick={(event) => smoothScrollTo(event, "contact")} className="fixed bottom-20 right-4 z-50 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/70 px-4 py-3 text-sm text-white/80 backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 md:bottom-6">
+      <a href="#contact" onClick={(event) => smoothScrollTo(event, "contact")} className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/70 px-4 py-3 text-sm text-white/80 backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 md:bottom-6">
         <Mail className="h-4 w-4" />
         Contato
       </a>
