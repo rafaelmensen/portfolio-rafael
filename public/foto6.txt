@@ -1,1 +1,0 @@
-Imagem do projeto 6: renomeie sua imagem para foto6.jpg e coloque nesta pasta public.
