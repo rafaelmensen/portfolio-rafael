@@ -14,6 +14,7 @@ import {
   GraduationCap,
   Layers3,
   Mail,
+  Home,
   MonitorSmartphone,
   MoveRight,
   PenTool,
@@ -162,6 +163,7 @@ export default function PortfolioRafaelMensen() {
   const mouseY = useMotionValue(0);
   const scrollBlur = useTransform(scrollY, [0, 600], [0, 18]);
   const scrollGlow = useTransform(scrollY, [0, 650], [0.38, 0.58]);
+  const bottomVeilOpacity = useTransform(scrollY, [0, 240], [0.74, 0.08]);
 
   const cardShift = typeof window !== "undefined" && window.innerWidth < 640 ? 0 : 350;
   const visibleExperience = showAllExperience ? experience : experience.slice(0, 1);
@@ -190,7 +192,7 @@ export default function PortfolioRafaelMensen() {
       setActive(targetId);
       setIsNavScrolling(false);
       document.body.classList.remove("is-navigating");
-    }, 680);
+    }, 80);
   };
 
   const scrollProjects = (direction: "left" | "right") => {
@@ -300,7 +302,7 @@ export default function PortfolioRafaelMensen() {
 
   const nav = useMemo(
     () => [
-      { id: "home", label: "Início", icon: Brush },
+      { id: "home", label: "Início", icon: Home },
       { id: "about", label: "Sobre", icon: User },
       { id: "skills", label: "Skills", icon: Layers3 },
       { id: "projects", label: "Projetos", icon: MonitorSmartphone },
@@ -310,7 +312,7 @@ export default function PortfolioRafaelMensen() {
   );
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#020202] text-zinc-100 selection:bg-white/20">
+    <div className="min-h-screen overflow-x-hidden bg-[#020202] text-zinc-100 selection:bg-white/10">
       <div className="pointer-events-none fixed inset-0 z-[1]">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-300/30 to-transparent" />
         <div className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-purple-300/24 to-transparent" />
@@ -338,16 +340,16 @@ export default function PortfolioRafaelMensen() {
 
         .soft-reveal {
           opacity: 0;
-          transform: translate3d(0, 42px, 0) scale(.975);
+          transform: translate3d(0, 54px, 0) scale(.972);
           filter: blur(22px);
           animation: softReveal .95s cubic-bezier(.22,1,.36,1) both;
           animation-timeline: view();
-          animation-range: entry 8% cover 30%;
+          animation-range: entry 6% cover 34%;
         }
         .soft-reveal:nth-child(2n) { animation-duration: 1.08s; }
         .soft-reveal:nth-child(3n) { animation-duration: .9s; }
         @keyframes softReveal {
-          from { opacity: 0; filter: blur(22px); transform: translate3d(0, 42px, 0) scale(.975); }
+          from { opacity: 0; filter: blur(22px); transform: translate3d(0, 54px, 0) scale(.972); }
           to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) scale(1); }
         }
         .text-glow-hover:hover h1,
@@ -390,6 +392,12 @@ export default function PortfolioRafaelMensen() {
           50% { transform: translateX(25%); }
           100% { transform: translateX(-25%); }
         }
+
+        @keyframes contactGlow {
+          0%,100% { box-shadow: 0 0 0 rgba(100,130,255,0), inset 1px 1px 0 rgba(255,255,255,.08); border-color: rgba(255,255,255,.10); }
+          50% { box-shadow: 0 0 26px rgba(105,130,255,.22), 0 0 54px rgba(145,90,255,.12), inset 1px 1px 0 rgba(255,255,255,.14); border-color: rgba(180,190,255,.24); }
+        }
+
         @keyframes buttonBorder {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
@@ -400,7 +408,7 @@ export default function PortfolioRafaelMensen() {
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-[#010101]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(100,58,220,0.30),transparent_38%),radial-gradient(circle_at_12%_55%,rgba(35,145,255,0.32),transparent_34%),radial-gradient(circle_at_88%_45%,rgba(155,82,255,0.28),transparent_36%)]" />
-        <div className="absolute left-[-8%] top-[18%] h-[18rem] w-[72vw] animate-[meshPulse_10s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(75,110,255,0.22),rgba(155,90,255,0.18),transparent)] blur-[54px]" />
+        <div className="absolute left-[-8%] top-[18%] h-[18rem] w-[72vw] animate-[meshPulse_s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(75,110,255,0.22),rgba(155,90,255,0.18),transparent)] blur-[54px]" />
         <div className="absolute right-[-10%] bottom-[16%] h-[16rem] w-[64vw] animate-[meshPulse_12s_ease-in-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(160,80,255,0.18),rgba(65,145,255,0.16),transparent)] blur-[58px]" />
         <motion.div
           className="absolute h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,rgba(0,0,0,0.72),rgba(0,0,0,0.42)_38%,rgba(0,0,0,0.12)_62%,transparent_76%)] blur-[34px]"
@@ -430,11 +438,16 @@ export default function PortfolioRafaelMensen() {
         <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black/82 via-black/28 to-transparent" />
       </div>
 
-      <header className={`fixed inset-x-0 top-4 z-50 flex justify-center px-3 transition-opacity duration-700 ${idleNav ? "opacity-35 hover:opacity-100" : "opacity-100"}`}>
-        <nav className={`relative max-w-[calc(100vw-24px)] rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.24),rgba(142,92,255,0.30),rgba(70,150,255,0.26),rgba(255,255,255,0.13))] bg-[length:260%_260%] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.7),0_0_44px_rgba(90,105,255,0.16)] backdrop-blur-[38px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] animate-[navOpen_850ms_cubic-bezier(0.22,1,0.36,1)_both] ${pulse ? "scale-[1.012] blur-[0.12px]" : "scale-100 blur-0"}`}>
-          <div className="relative flex items-center gap-1 overflow-hidden rounded-full bg-black/58 p-1.5 shadow-[inset_1px_1px_0_rgba(255,255,255,0.10),inset_-1px_-1px_0_rgba(255,255,255,0.03)] backdrop-blur-[42px] md:p-2">
-            <div className={`pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(95,150,255,0.30),transparent_55%)] transition-opacity duration-500 ${pulse ? "opacity-100" : "opacity-0"}`} />
 
+      <motion.div
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-[8] h-40 bg-gradient-to-t from-black/72 via-black/30 to-transparent backdrop-blur-[10px] md:h-48"
+        style={{ opacity: bottomVeilOpacity }}
+      />
+
+<header className={`fixed inset-x-0 top-4 z-50 flex justify-center px-3 transition-opacity duration-700 ${idleNav ? "opacity-35 hover:opacity-100" : "opacity-100"}`}>
+  <nav className={`relative max-w-[calc(100vw-24px)] rounded-full bg-[linear-gradient(120deg,rgba(255,255,255,0.10),rgba(52,32,92,0.22),rgba(24,52,98,0.18),rgba(255,255,255,0.04))] bg-[length:260%_260%] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.76),0_0_44px_rgba(45,55,120,0.10)] backdrop-blur-[44px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] animate-[navOpen_850ms_cubic-bezier(0.22,1,0.36,1)_both] ${pulse ? "scale-[1.012] blur-[0.12px]" : "scale-100 blur-0"}`}>
+    <div className="relative flex items-center gap-1 overflow-hidden rounded-full bg-black/14 p-1.5 shadow-[inset_1px_1px_0_rgba(255,255,255,0.08),inset_-1px_-1px_0_rgba(255,255,255,0.02)] backdrop-blur-[48px] md:p-2">
+      <div className={`pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(78,120,255,0.18),transparent_58%)] transition-opacity duration-500 ${pulse ? "opacity-100" : "opacity-0"}`} />
             {nav.map((item) => {
               const Icon = item.icon;
               const isActive = displayActive === item.id;
@@ -500,7 +513,7 @@ export default function PortfolioRafaelMensen() {
 
               <div className="relative hidden lg:block lg:self-start lg:pt-0">
                 <div className="absolute -inset-8 rounded-[3rem] bg-[radial-gradient(circle,rgba(110,92,255,0.22),transparent_65%)] blur-2xl" />
-                <div className="relative mx-auto max-w-[220px] overflow-hidden rounded-[2.2rem] bg-[linear-gradient(120deg,rgba(255,255,255,0.28),rgba(142,92,255,0.34),rgba(70,150,255,0.30),rgba(255,255,255,0.14))] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.70),0_0_44px_rgba(90,105,255,0.14)] backdrop-blur-[38px] sm:max-w-[240px] lg:max-w-[260px]">
+                <div className="relative mx-auto max-w-[220px] overflow-hidden rounded-[2.2rem] bg-[linear-gradient(120deg,rgba(48,32,92,0.24),rgba(67, 16, 187, 0.34),rgba(70,150,255,0.30),rgba(255,255,255,0.14))] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.70),0_0_44px_rgba(40,50,120,0.12)] backdrop-blur-[38px] sm:max-w-[240px] lg:max-w-[260px]">
                   <div className="m-3 grid aspect-[4/5] place-items-center overflow-hidden rounded-[1.6rem] border border-white/10 bg-[radial-gradient(circle_at_35%_22%,rgba(255,255,255,0.12),transparent_28%),linear-gradient(145deg,rgba(18,22,35,0.92),rgba(7,7,10,0.96))]">
                     <img
                       src={`${import.meta.env.BASE_URL}rafael.jpg`}
@@ -602,7 +615,7 @@ export default function PortfolioRafaelMensen() {
 
             <div className="relative overflow-hidden rounded-[2rem] bg-transparent pb-4 sm:rounded-[2.4rem]">
               
-              <div className="pointer-events-none absolute bottom-4 right-0 top-0 z-20 w-16 bg-gradient-to-l from-[#020202]/90 to-transparent sm:w-28" />
+              <div className="pointer-events-none absolute bottom-4 right-0 top-0 z-20 w-16 bg-gradient-to-l from-[#020202]/40 to-transparent sm:w-28" />
               <div className="story-carousel relative z-10 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] md:gap-5 md:overflow-visible md:pb-0 md:transition-transform md:duration-[900ms] md:ease-[cubic-bezier(0.22,1,0.36,1)] md:will-change-transform" style={{ transform: `translateX(-${projectIndex * cardShift}px)` }}>
                 {projects.map((project, index) => (
                   <article key={project.title} className="group soft-reveal relative h-[390px] w-[78vw] max-w-[330px] snap-center shrink-0 overflow-hidden sm:h-[390px] sm:w-[330px] rounded-[2.2rem] border border-white/10 bg-black/50 shadow-[inset_1px_1px_0_rgba(255,255,255,0.10),0_26px_80px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition duration-500 hover:-translate-y-2 hover:border-white/20 hover:text-white">
@@ -613,7 +626,7 @@ export default function PortfolioRafaelMensen() {
                     <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/55" />
                   </div>
                     <div className="absolute left-6 top-6 rounded-full border border-white/10 bg-black/35 px-3 py-1 text-xs text-zinc-300 backdrop-blur-xl">{String(index + 1).padStart(2, "0")}</div>
-                    <div className="absolute bottom-0 left-0 right-0 translate-y-16 bg-gradient-to-t from-black via-black/85 to-transparent p-6 pt-24 transition duration-500 group-hover:translate-y-0">
+                    <div className="absolute bottom-0 left-0 right-0 translate-y-16 bg-gradient-to-t from-black/78 via-black/42 to-transparent p-6 pt-24 transition duration-500 group-hover:translate-y-0">
                       <div className="text-xs uppercase tracking-[0.28em] text-zinc-500">{project.category}</div>
                       <h3 className="mt-2 text-2xl font-black">{project.title}</h3>
                       <p className="mt-3 text-sm leading-6 text-zinc-400 opacity-0 transition duration-500 group-hover:opacity-100">{project.description}</p>
@@ -794,7 +807,7 @@ export default function PortfolioRafaelMensen() {
         {active === "home" ? "Fim" : "Topo"}
       </a>
 
-      <a href="#contact" onClick={(event) => smoothScrollTo(event, "contact")} className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/70 px-4 py-3 text-sm text-white/80 backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 md:bottom-6">
+      <a href="#contact" onClick={(event) => smoothScrollTo(event, "contact")} className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/70 px-4 py-3 text-sm text-white/80 shadow-[0_0_0_rgba(110,130,255,0)] backdrop-blur-xl transition duration-300 animate-[contactGlow_2.6s_ease-in-out_infinite] hover:-translate-y-0.5 hover:bg-white/10 md:bottom-6">
         <Mail className="h-4 w-4" />
         Contato
       </a>
